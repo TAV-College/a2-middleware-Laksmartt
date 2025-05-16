@@ -1,3 +1,11 @@
+const { db, initDB } = require("./models/db_base");
+
+// Check if 'users' table exists, else initialize
+const row = db.prepare("SELECT name FROM sqlite_master WHERE type='table' AND name='users'").get();
+if (!row) {
+  console.log("Users table missing. Initializing DB...");
+  initDB();
+}
 // Base imports
 const express = require("express");
 const bodyParser = require("body-parser");
